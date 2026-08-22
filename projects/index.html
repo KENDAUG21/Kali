@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Kali Linux Learning Hub</title>
+<meta name="description" content="Nine hands-on Kali Linux projects across Beginner, Intermediate, and Advanced difficulty — from your first Nmap scan to a full Active Directory pentest.">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-titlebar">
+    <div class="wrap" style="display:flex;align-items:center;gap:10px;">
+      <div class="term-dots"><span></span><span></span><span></span></div>
+      <div class="term-path"><span class="caret">➜</span> kali-learning-hub git:(main) root@kali:~/projects#</div>
+    </div>
+  </div>
+  <nav class="navbar wrap">
+    <a href="../index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+      <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">~/home</a>
+      <a href="../beginner/index.html">~/beginner</a>
+      <a href="../intermediate/index.html">~/intermediate</a>
+      <a href="../advanced/index.html">~/advanced</a>
+      <a href="../projects/index.html" class="active" aria-current="page">~/projects</a>
+      <a href="../resources/index.html">~/resources</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow violet">find . -type project</div>
+      <h1>Nine projects. Three difficulty levels. All hands-on.</h1>
+      <p>Every project pairs with a module from one of the three tracks and targets an intentionally vulnerable, legal practice environment — never a live system you don't control. Filter by level, or just work through them top to bottom.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="projects-filter" role="group" aria-label="Filter projects by difficulty">
+        <button class="filter-btn active" data-filter="all">All projects</button>
+        <button class="filter-btn" data-filter="beginner">Beginner</button>
+        <button class="filter-btn" data-filter="intermediate">Intermediate</button>
+        <button class="filter-btn" data-filter="advanced">Advanced</button>
+      </div>
+
+      <!-- ============ BEGINNER PROJECTS ============ -->
+      <div class="project-group" data-level="beginner">
+        <div class="project-group-head">
+          <span class="badge badge-beginner">Beginner</span>
+          <h2>Foundations in practice</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="grid-3">
+
+          <article class="project-card term-window" id="nmap-scan">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/nmap-scan</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-beginner">Beginner</span></div>
+              <h3>Your first Nmap scan</h3>
+              <p>Discover what's actually running on a lab target before you ever try to attack it.</p>
+              <div class="project-meta">
+                <span>⏱ 30–45 min</span>
+                <span>✓ Beginner module 6</span>
+              </div>
+              <div class="project-tools"><span>Nmap</span><span>VirtualBox</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>Boot Kali and a target VM (Metasploitable or DVWA) on the same Host-only network</li>
+                  <li>Confirm the target's IP address from within the target VM itself (<code>ip a</code>)</li>
+                  <li>From Kali, run <code>nmap -sV -sC &lt;target-ip&gt;</code></li>
+                  <li>Save the output with <code>-oN first-scan.txt</code></li>
+                  <li>Write 3–4 sentences: what's exposed, and why each open port matters</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card term-window" id="wireshark-capture">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/wireshark-capture</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-beginner">Beginner</span></div>
+              <h3>Wireshark packet capture</h3>
+              <p>See exactly what a network conversation looks like at the byte level.</p>
+              <div class="project-meta">
+                <span>⏱ 30–45 min</span>
+                <span>✓ Beginner module 6</span>
+              </div>
+              <div class="project-tools"><span>Wireshark</span><span>curl</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>Open Wireshark on Kali and start a capture on the Host-only interface</li>
+                  <li>From a second terminal, <code>ping</code> and then <code>curl http://&lt;target-ip&gt;</code> the target VM</li>
+                  <li>Apply the display filter <code>ip.addr == &lt;target-ip&gt;</code></li>
+                  <li>Right-click an HTTP request → Follow → TCP Stream</li>
+                  <li>Note what's readable in plaintext, and why HTTPS would change that</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card term-window" id="dvwa-setup">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/dvwa-setup</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-beginner">Beginner</span></div>
+              <h3>Set up DVWA</h3>
+              <p>Stand up your own legal web-app target that every later web project will reuse.</p>
+              <div class="project-meta">
+                <span>⏱ 45–60 min</span>
+                <span>✓ Beginner module 5–7</span>
+              </div>
+              <div class="project-tools"><span>Docker</span><span>DVWA</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>Install Docker on your target VM (or a dedicated third VM)</li>
+                  <li>Pull and run a DVWA image, e.g. <code>docker run -d -p 80:80 vulnerables/web-dvwa</code></li>
+                  <li>Browse to the target's IP from Kali and complete the DVWA database setup screen</li>
+                  <li>Log in with the documented default DVWA credentials, then set the security level to "low" for practice</li>
+                  <li>Confirm you can reach it from Kali only — never expose it beyond your lab network</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ============ INTERMEDIATE PROJECTS ============ -->
+      <div class="project-group" data-level="intermediate">
+        <div class="project-group-head">
+          <span class="badge badge-intermediate">Intermediate</span>
+          <h2>Core toolset in practice</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="grid-3">
+
+          <article class="project-card term-window" id="burp-exploitation">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/burp-exploitation</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-intermediate">Intermediate</span></div>
+              <h3>Burp Suite exploitation</h3>
+              <p>Find and exploit a broken access control issue in DVWA using a proxy, not guesswork.</p>
+              <div class="project-meta">
+                <span>⏱ 1–2 hrs</span>
+                <span>✓ Intermediate module 3</span>
+              </div>
+              <div class="project-tools"><span>Burp Suite</span><span>DVWA</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>Point your browser's proxy at Burp and install its CA certificate</li>
+                  <li>Log into DVWA's "Insecure Direct Object Reference" module as a low-privilege test account</li>
+                  <li>Intercept a request containing a user or record ID parameter</li>
+                  <li>Send it to Repeater and change the ID to a different value</li>
+                  <li>Document what data you can access that you shouldn't be able to, and why</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card term-window" id="hydra-brute-force">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/hydra-brute-force</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-intermediate">Intermediate</span></div>
+              <h3>Hydra brute force</h3>
+              <p>See exactly how fast a weak password falls, then see how much a strong one changes that.</p>
+              <div class="project-meta">
+                <span>⏱ 45–60 min</span>
+                <span>✓ Intermediate module 4</span>
+              </div>
+              <div class="project-tools"><span>Hydra</span><span>SSH</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>On your target VM, create a test user with a weak password taken from a small local wordlist</li>
+                  <li>Confirm SSH is running: <code>systemctl status ssh</code> on the target</li>
+                  <li>From Kali, run Hydra against that user with the same wordlist</li>
+                  <li>Record how long it took to find the correct password</li>
+                  <li>Reset the account to a long, random passphrase and note why Hydra would no longer succeed in a practical timeframe</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card term-window" id="metasploit-exploitation">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/metasploit-exploitation</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-intermediate">Intermediate</span></div>
+              <h3>Metasploit exploitation</h3>
+              <p>Use a real framework exploit to land your first shell on Metasploitable.</p>
+              <div class="project-meta">
+                <span>⏱ 1 hr</span>
+                <span>✓ Intermediate module 2</span>
+              </div>
+              <div class="project-tools"><span>Metasploit</span><span>Metasploitable</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>Scan the Metasploitable VM with Nmap and note the FTP service and version</li>
+                  <li>In <code>msfconsole</code>, search for and select the matching backdoor exploit module</li>
+                  <li>Set <code>RHOSTS</code> and <code>LHOST</code>, then run the exploit</li>
+                  <li>Confirm your access level with <code>whoami</code> in the resulting shell</li>
+                  <li>Write down what a real attacker could do next from this position</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ============ ADVANCED PROJECTS ============ -->
+      <div class="project-group" data-level="advanced">
+        <div class="project-group-head">
+          <span class="badge badge-advanced">Advanced</span>
+          <h2>Capstone-level builds</h2>
+          <div class="divider"></div>
+        </div>
+        <div class="grid-3">
+
+          <article class="project-card term-window" id="buffer-overflow-project">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/buffer-overflow</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-advanced">Advanced</span></div>
+              <h3>Buffer overflow exploitation</h3>
+              <p>Work a classic stack overflow end to end, in a fully isolated debugger lab.</p>
+              <div class="project-meta">
+                <span>⏱ 4–6 hrs</span>
+                <span>✓ Advanced module 3</span>
+              </div>
+              <div class="project-tools"><span>Immunity Debugger</span><span>mona.py</span><span>msfvenom</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>Set up an isolated Windows lab VM with a purpose-built vulnerable TCP app and Immunity Debugger + mona.py attached</li>
+                  <li>Fuzz the application from Kali until it crashes, and note the crash state</li>
+                  <li>Generate a cyclic pattern to find your exact EIP offset</li>
+                  <li>Identify bad characters, then find a reliable JMP ESP address</li>
+                  <li>Generate shellcode with msfvenom and assemble a final proof-of-concept script</li>
+                  <li>Confirm a reverse shell lands on a listener on your Kali VM, then write up every step</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card term-window" id="reverse-engineering-project">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/reverse-engineering</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-advanced">Advanced</span></div>
+              <h3>Reverse engineering challenge</h3>
+              <p>Recover the hidden logic of a small CTF-style binary using static and dynamic analysis.</p>
+              <div class="project-meta">
+                <span>⏱ 2–4 hrs</span>
+                <span>✓ Advanced module 2</span>
+              </div>
+              <div class="project-tools"><span>Ghidra</span><span>GDB</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>Download a beginner "crackme" binary from a legal practice source (crackmes.one, picoCTF reversing category)</li>
+                  <li>Run <code>file</code> and <code>strings</code> to get a first read on what it is</li>
+                  <li>Load it into Ghidra and let it auto-analyze, then read the decompiled <code>main</code> function</li>
+                  <li>Identify the comparison or key-check logic that decides success or failure</li>
+                  <li>Confirm your theory dynamically in GDB by breaking at that comparison and inspecting registers</li>
+                  <li>Recover the expected input and document how you found it</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card term-window" id="ad-pentest">
+            <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/ad-pentest</div></div>
+            <div class="project-card-body">
+              <div class="project-card-top"><span class="badge badge-advanced">Advanced</span></div>
+              <h3>Active Directory pentest</h3>
+              <p>The capstone: build a small AD lab and run the full five-phase methodology against it.</p>
+              <div class="project-meta">
+                <span>⏱ 8–12 hrs</span>
+                <span>✓ Advanced module 7</span>
+              </div>
+              <div class="project-tools"><span>Windows Server eval</span><span>Metasploit</span><span>enum4linux</span></div>
+              <div class="project-steps">
+                <ol>
+                  <li>Build a 3-machine lab: a Windows Server domain controller, a Windows workstation joined to the domain, and your Kali attacker VM, all on an isolated Internal Network</li>
+                  <li>Recon &amp; enumerate the domain with Nmap and enum4linux from Kali</li>
+                  <li>Find and exploit an initial foothold on the workstation using an intentionally weak configuration you set up (e.g. a weak local account)</li>
+                  <li>Escalate privileges and harvest local credentials from the workstation</li>
+                  <li>Pivot from the workstation to reach the domain controller and demonstrate domain-level impact</li>
+                  <li>Write a short report: executive summary, findings with severity, and remediation steps — following the format from the methodology module</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="../index.html" class="brand" style="margin-bottom:12px; display:inline-flex;">
+          <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+          <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+        </a>
+        <p>A free, independent Kali Linux curriculum for learning ethical hacking safely and legally. Not affiliated with or endorsed by Offensive Security.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../beginner/index.html">Beginner track</a></li>
+          <li><a href="../intermediate/index.html">Intermediate track</a></li>
+          <li><a href="../advanced/index.html">Advanced track</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../projects/index.html">All projects</a></li>
+          <li><a href="../resources/index.html">Cheat sheets</a></li>
+          <li><a href="../resources/index.html#legal">Legal guidelines</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Official docs</h4>
+        <ul>
+          <li><a href="https://www.kali.org/docs/" target="_blank" rel="noopener">Kali Linux docs</a></li>
+          <li><a href="https://nmap.org/book/" target="_blank" rel="noopener">Nmap reference guide</a></li>
+          <li><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>root@kali:~/projects# exit</p>
+      <p>© 2026 Kali Linux Learning Hub · Educational content only · For authorized lab use</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

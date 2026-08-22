@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resources — Kali Linux Learning Hub</title>
+<meta name="description" content="Cheat sheets for Linux, Nmap, and Metasploit, links to official documentation, and full legal and safe-practice guidelines for ethical hacking.">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-titlebar">
+    <div class="wrap" style="display:flex;align-items:center;gap:10px;">
+      <div class="term-dots"><span></span><span></span><span></span></div>
+      <div class="term-path"><span class="caret">➜</span> kali-learning-hub git:(main) root@kali:~/resources#</div>
+    </div>
+  </div>
+  <nav class="navbar wrap">
+    <a href="../index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+      <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">~/home</a>
+      <a href="../beginner/index.html">~/beginner</a>
+      <a href="../intermediate/index.html">~/intermediate</a>
+      <a href="../advanced/index.html">~/advanced</a>
+      <a href="../projects/index.html">~/projects</a>
+      <a href="../resources/index.html" class="active" aria-current="page">~/resources</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="eyebrow">man resources</div>
+      <h1>Cheat sheets, docs, and the rules that keep this legal.</h1>
+      <p>Quick-reference tables for the commands you'll use constantly, links out to the official documentation for every tool taught on this hub, and — most importantly — the full legal and safe-practice guidelines every track points back to.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHEAT SHEETS ============ -->
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">cat cheatsheets/*.md</div>
+      <h2 class="section-title">Cheat sheets</h2>
+      <p class="section-lede" style="margin-bottom:30px;">The commands from every track, in one scannable place.</p>
+
+      <div class="term-window" style="margin-bottom:26px;">
+        <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/resources/linux-commands.md</div></div>
+        <div style="padding:6px 22px 20px;">
+          <table class="cheat-table">
+            <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>pwd</code></td><td class="desc">Print the current working directory</td></tr>
+              <tr><td><code>ls -la</code></td><td class="desc">List all files, including hidden ones, with details</td></tr>
+              <tr><td><code>cd &lt;dir&gt;</code></td><td class="desc">Change directory</td></tr>
+              <tr><td><code>cp / mv / rm -r</code></td><td class="desc">Copy, move/rename, or recursively delete files</td></tr>
+              <tr><td><code>chmod +x file</code></td><td class="desc">Make a file executable</td></tr>
+              <tr><td><code>sudo &lt;cmd&gt;</code></td><td class="desc">Run a single command with admin privileges</td></tr>
+              <tr><td><code>man &lt;cmd&gt;</code></td><td class="desc">Open the manual page for a command</td></tr>
+              <tr><td><code>find / -perm -4000</code></td><td class="desc">Search the filesystem for SUID binaries</td></tr>
+              <tr><td><code>ps aux</code></td><td class="desc">List all running processes</td></tr>
+              <tr><td><code>ip a</code></td><td class="desc">Show network interfaces and IP addresses</td></tr>
+              <tr><td><code>ssh user@host</code></td><td class="desc">Open a secure shell session to a remote host</td></tr>
+              <tr><td><code>grep -r "text" .</code></td><td class="desc">Recursively search files for a string</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="term-window" style="margin-bottom:26px;">
+        <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/resources/nmap.md</div></div>
+        <div style="padding:6px 22px 20px;">
+          <table class="cheat-table">
+            <thead><tr><th>Flag</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>-sS</code></td><td class="desc">SYN ("half-open") scan — fast, needs root</td></tr>
+              <tr><td><code>-sT</code></td><td class="desc">Full TCP connect scan — no root required</td></tr>
+              <tr><td><code>-sU</code></td><td class="desc">UDP scan</td></tr>
+              <tr><td><code>-sV</code></td><td class="desc">Detect service and version on open ports</td></tr>
+              <tr><td><code>-O</code></td><td class="desc">Attempt OS fingerprinting</td></tr>
+              <tr><td><code>-A</code></td><td class="desc">Aggressive: OS + version + scripts + traceroute</td></tr>
+              <tr><td><code>-p-</code></td><td class="desc">Scan all 65,535 ports</td></tr>
+              <tr><td><code>-Pn</code></td><td class="desc">Skip host discovery, treat the host as up</td></tr>
+              <tr><td><code>-T0</code>–<code>-T5</code></td><td class="desc">Timing template, slowest to fastest/noisiest</td></tr>
+              <tr><td><code>--script=vuln</code></td><td class="desc">Run NSE scripts that check for known vulnerabilities</td></tr>
+              <tr><td><code>-oN file.txt</code></td><td class="desc">Save readable output to a file</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="term-window">
+        <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/resources/metasploit.md</div></div>
+        <div style="padding:6px 22px 20px;">
+          <table class="cheat-table">
+            <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>search &lt;term&gt;</code></td><td class="desc">Search for a matching module</td></tr>
+              <tr><td><code>use &lt;module&gt;</code></td><td class="desc">Select a module to configure</td></tr>
+              <tr><td><code>show options</code></td><td class="desc">List required and optional settings for the current module</td></tr>
+              <tr><td><code>set RHOSTS &lt;ip&gt;</code></td><td class="desc">Set the target IP address</td></tr>
+              <tr><td><code>set PAYLOAD &lt;name&gt;</code></td><td class="desc">Choose what runs after successful exploitation</td></tr>
+              <tr><td><code>exploit</code> / <code>run</code></td><td class="desc">Launch the configured module</td></tr>
+              <tr><td><code>sessions -l</code></td><td class="desc">List active sessions</td></tr>
+              <tr><td><code>sessions -i &lt;id&gt;</code></td><td class="desc">Interact with a specific session</td></tr>
+              <tr><td><code>sysinfo</code> / <code>getuid</code></td><td class="desc">(Meterpreter) show host info / current user</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOCUMENTATION LINKS ============ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="eyebrow">ls ~/resources/docs</div>
+      <h2 class="section-title">Official documentation</h2>
+      <p class="section-lede" style="margin-bottom:28px;">This hub teaches the fundamentals — these are the primary sources for everything beyond that.</p>
+
+      <div class="grid-2">
+        <a class="resource-link" href="https://www.kali.org/docs/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9l3 2.5-3 2.5M13 14h4"/></svg>
+          <div><b>Kali Linux Official Documentation</b><span>Installation, tool docs, and troubleshooting from the maintainers</span></div>
+        </a>
+        <a class="resource-link" href="https://nmap.org/book/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+          <div><b>Nmap Reference Guide</b><span>The complete official Nmap book, free online</span></div>
+        </a>
+        <a class="resource-link" href="https://portswigger.net/burp/documentation" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5z"/></svg>
+          <div><b>Burp Suite Documentation</b><span>Official PortSwigger docs, including free Web Security Academy labs</span></div>
+        </a>
+        <a class="resource-link" href="https://owasp.org/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5.2 3.4 9.4 8 11 4.6-1.6 8-5.8 8-11V5l-8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <div><b>OWASP Foundation</b><span>Web application security standards, the Testing Guide, and the Top 10</span></div>
+        </a>
+        <a class="resource-link" href="https://www.aircrack-ng.org/documentation.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0"/><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"/></svg>
+          <div><b>Aircrack-ng Documentation</b><span>Official docs for the full wireless auditing suite</span></div>
+        </a>
+        <a class="resource-link" href="https://www.openwall.com/john/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <div><b>John the Ripper — Openwall</b><span>Official homepage and documentation for the password cracker</span></div>
+        </a>
+        <a class="resource-link" href="https://gtfobins.github.io/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg>
+          <div><b>GTFOBins</b><span>Reference for Unix binaries that can be abused for privilege escalation</span></div>
+        </a>
+        <a class="resource-link" href="https://pentest-standard.readthedocs.io/en/latest/tree.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22.5v-18z"/><line x1="8" y1="7" x2="15" y2="7"/></svg>
+          <div><b>PTES — Penetration Testing Execution Standard</b><span>The methodology framework referenced in the Advanced track</span></div>
+        </a>
+        <a class="resource-link" href="https://csrc.nist.gov/pubs/sp/800/115/final" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5.2 3.4 9.4 8 11 4.6-1.6 8-5.8 8-11V5l-8-3z"/></svg>
+          <div><b>NIST SP 800-115</b><span>Technical Guide to Information Security Testing and Assessment</span></div>
+        </a>
+        <a class="resource-link" href="https://www.hackthebox.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>
+          <div><b>HackTheBox</b><span>Legal practice targets and CTF-style machines</span></div>
+        </a>
+        <a class="resource-link" href="https://tryhackme.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.5h6c0-1.2.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
+          <div><b>TryHackMe</b><span>Guided, beginner-friendly rooms covering every track on this hub</span></div>
+        </a>
+        <a class="resource-link" href="https://www.vulnhub.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+          <div><b>VulnHub</b><span>Free downloadable vulnerable VMs for offline lab practice</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEGAL & SAFE PRACTICE ============ -->
+  <section id="legal" class="tight">
+    <div class="wrap">
+      <div class="eyebrow crimson">cat LEGAL.md</div>
+      <h2 class="section-title">Legal &amp; safe-practice guidelines</h2>
+      <p class="section-lede" style="margin-bottom:26px;">Every module on this hub links back here. Read it once, fully, before you run a single offensive tool — and revisit it any time you're unsure whether something is in bounds.</p>
+
+      <div class="callout callout-legal" style="margin-bottom:28px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 20h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none"/></svg>
+        <p><strong>This is not legal advice</strong>Laws around computer access vary by country, state, and even by specific statute. Nothing here is a substitute for consulting an actual lawyer if you have a real doubt about a specific situation. When in doubt, don't run the tool.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/legal/the-law.md</div></div>
+          <div class="module-body">
+            <h4>The legal baseline</h4>
+            <ul>
+              <li>In the United States, the <a href="https://www.law.cornell.edu/uscode/text/18/1030" target="_blank" rel="noopener" style="color:var(--accent-cyan);">Computer Fraud and Abuse Act (18 U.S.C. § 1030)</a> makes accessing a computer system "without authorization" a federal crime</li>
+              <li>Most other countries — the UK's Computer Misuse Act, the EU's Directive 2013/40/EU, and similar statutes elsewhere — carry equivalent prohibitions</li>
+              <li>Unauthorized <em>access alone</em> can be a crime, even with no data stolen and no damage caused</li>
+              <li>"I was just testing" or "I meant no harm" is not a legal defense to unauthorized access</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/legal/what-counts-as-authorized.md</div></div>
+          <div class="module-body">
+            <h4>What "authorized" actually means</h4>
+            <ul>
+              <li>Systems and VMs you personally own, on a network isolated from anyone else</li>
+              <li>Purpose-built practice targets: DVWA, Metasploitable, OWASP Juice Shop, VulnHub and HackTheBox machines</li>
+              <li>A client's or employer's systems, only under a signed contract defining scope, dates, and rules of engagement</li>
+              <li>Bug bounty programs — strictly within the exact scope the program publishes, nothing adjacent</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top:22px;">
+        <div class="term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/legal/lab-hygiene.md</div></div>
+          <div class="module-body">
+            <h4>Lab hygiene</h4>
+            <ul>
+              <li>Keep attacker and target VMs on an isolated Host-only or Internal Network — never Bridged — during practice</li>
+              <li>Snapshot before every project so mistakes cost seconds, not hours</li>
+              <li>Never point a scan, exploit, or wireless attack tool at an IP or SSID you haven't personally confirmed you own or are authorized to test</li>
+              <li>Keep tools and VM images updated — an out-of-date lab can behave unpredictably in ways that are hard to debug</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/legal/if-you-find-something.md</div></div>
+          <div class="module-body">
+            <h4>If you stumble onto something real</h4>
+            <ul>
+              <li>Stop immediately — don't explore further or try to "confirm" the issue beyond what you already saw</li>
+              <li>Don't access, download, or modify any data beyond what you accidentally observed</li>
+              <li>Check whether the organization has a responsible disclosure policy or bug bounty program and report through it</li>
+              <li>If there's no clear reporting channel, document what you saw and consider contacting the organization's security team directly, without probing further</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip" style="margin-top:26px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.5h6c0-1.2.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
+        <p><strong>The simplest rule</strong>If you can't point to written permission or personal ownership of the system in front of you, don't run the tool. Every project on this hub is designed so you never have to make that judgment call.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="../index.html" class="brand" style="margin-bottom:12px; display:inline-flex;">
+          <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+          <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+        </a>
+        <p>A free, independent Kali Linux curriculum for learning ethical hacking safely and legally. Not affiliated with or endorsed by Offensive Security.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../beginner/index.html">Beginner track</a></li>
+          <li><a href="../intermediate/index.html">Intermediate track</a></li>
+          <li><a href="../advanced/index.html">Advanced track</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../projects/index.html">All projects</a></li>
+          <li><a href="../resources/index.html">Cheat sheets</a></li>
+          <li><a href="../resources/index.html#legal">Legal guidelines</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Official docs</h4>
+        <ul>
+          <li><a href="https://www.kali.org/docs/" target="_blank" rel="noopener">Kali Linux docs</a></li>
+          <li><a href="https://nmap.org/book/" target="_blank" rel="noopener">Nmap reference guide</a></li>
+          <li><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>root@kali:~/resources# exit</p>
+      <p>© 2026 Kali Linux Learning Hub · Educational content only · For authorized lab use</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

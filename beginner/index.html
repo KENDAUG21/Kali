@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beginner Track — Kali Linux Learning Hub</title>
+<meta name="description" content="Start Kali Linux from zero: install it in VirtualBox, learn the terminal, update packages, understand networking basics, and learn the legal rules of pentesting.">
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-titlebar">
+    <div class="wrap" style="display:flex;align-items:center;gap:10px;">
+      <div class="term-dots"><span></span><span></span><span></span></div>
+      <div class="term-path"><span class="caret">➜</span> kali-learning-hub git:(main) root@kali:~/beginner#</div>
+    </div>
+  </div>
+  <nav class="navbar wrap">
+    <a href="../index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+      <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="../index.html">~/home</a>
+      <a href="../beginner/index.html" class="active" aria-current="page">~/beginner</a>
+      <a href="../intermediate/index.html">~/intermediate</a>
+      <a href="../advanced/index.html">~/advanced</a>
+      <a href="../projects/index.html">~/projects</a>
+      <a href="../resources/index.html">~/resources</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main style="--level-accent: var(--accent-cyan);">
+
+  <section class="level-hero">
+    <div class="wrap">
+      <div class="level-hero-top">
+        <span class="badge badge-beginner">Beginner Track</span>
+        <a href="../projects/index.html" class="btn btn-outline btn-sm">Jump to beginner projects →</a>
+      </div>
+      <h1>Get Kali running, learn the terminal, and learn the rules.</h1>
+      <p>This track takes you from "what even is Kali Linux" to comfortably navigating a VM, running basic commands, and understanding exactly where the legal line sits before you touch an offensive tool. No prior Linux experience required.</p>
+      <div class="level-meta">
+        <div><b>07</b>modules</div>
+        <div><b>03</b>paired projects</div>
+        <div><b>~6–8h</b>self-paced</div>
+        <div><b>0</b>prerequisites</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap level-layout">
+    <aside class="toc">
+      <div class="toc-label">On this page</div>
+      <ol>
+        <li><a href="#what-is-kali">What Kali Linux is</a></li>
+        <li><a href="#install-virtualbox">Installing Kali on VirtualBox</a></li>
+        <li><a href="#terminal-basics">Basic terminal commands</a></li>
+        <li><a href="#updating-packages">Updating packages</a></li>
+        <li><a href="#kali-menu">Navigating the Kali menu</a></li>
+        <li><a href="#networking-basics">Networking basics</a></li>
+        <li><a href="#safe-legal">Safe &amp; legal pentesting</a></li>
+      </ol>
+      <div class="toc-label" style="margin-top:22px;">Paired projects</div>
+      <ol style="counter-reset: none;">
+        <li style="list-style:none;"><a href="../projects/index.html#nmap-scan" style="padding-left:10px;">Nmap scan</a></li>
+        <li style="list-style:none;"><a href="../projects/index.html#wireshark-capture" style="padding-left:10px;">Wireshark capture</a></li>
+        <li style="list-style:none;"><a href="../projects/index.html#dvwa-setup" style="padding-left:10px;">DVWA setup</a></li>
+      </ol>
+    </aside>
+
+    <div class="modules">
+
+      <!-- MODULE 1 -->
+      <article class="module term-window" id="what-is-kali">
+        <div class="module-head"><span class="idx">01</span><h2>What Kali Linux is</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Kali Linux is a Debian-based operating system built specifically for penetration testing, digital forensics, and security research. Instead of hunting down and installing tools one by one, Kali ships with hundreds of them — network scanners, password crackers, wireless attack suites, exploitation frameworks, and forensic utilities — already installed and organized by task.</p>
+          <p>It's maintained by Offensive Security, the organization behind the OSCP certification, and it's released on a rolling-release model, meaning tools update continuously rather than in big yearly jumps.</p>
+
+          <h4>Why not just use regular Linux?</h4>
+          <ul>
+            <li>Security tools are pre-installed, patched, and organized by category out of the box</li>
+            <li>The desktop, menus, and defaults are tuned for security work rather than everyday computing</li>
+            <li>It includes special modes like Forensics Mode (avoids touching the host's disks) and Kali Undercover (disguises the desktop to look like Windows)</li>
+            <li>It's the de-facto standard in security courses, so guides and write-ups assume you're using it</li>
+          </ul>
+
+          <h4>Who actually uses it</h4>
+          <ul>
+            <li>Professional penetration testers and red teamers, under signed contracts</li>
+            <li>Security students working through certifications like OSCP, CompTIA PenTest+, or eJPT</li>
+            <li>CTF (Capture the Flag) players in competitions like picoCTF or HackTheBox</li>
+            <li>Security researchers doing malware analysis or vulnerability research</li>
+          </ul>
+
+          <div class="callout callout-info">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16.5"/><circle cx="12" cy="7.7" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <p><strong>Kali is a toolbox, not a shortcut</strong>Owning a lockpick set doesn't make you a locksmith. Kali gives you the tools; this hub teaches you how, when, and — most importantly — <em>where it's legal</em> to use them.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 2 -->
+      <article class="module term-window" id="install-virtualbox">
+        <div class="module-head"><span class="idx">02</span><h2>Installing Kali on VirtualBox</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Every project on this hub assumes Kali is running inside a virtual machine, not installed directly on your everyday computer. A VM gives you a disposable, snapshot-able lab: if you break something, you roll back in seconds, and nothing you do inside it touches your real files or network.</p>
+
+          <h4>What you'll need</h4>
+          <ul>
+            <li>VirtualBox (free) installed on your host computer, from virtualbox.org</li>
+            <li>Virtualization enabled in your BIOS/UEFI (Intel VT-x or AMD-V)</li>
+            <li>At least 4 GB of RAM and 20 GB of disk space to allocate to the VM</li>
+            <li>The official Kali VirtualBox image from kali.org/get-kali (choose the pre-built ".OVA" appliance, not the bare ISO, to save setup time)</li>
+          </ul>
+
+          <h4>Install steps</h4>
+          <ul>
+            <li>Download the Kali "Virtual Machines → VirtualBox 64-bit" image from the official Kali site</li>
+            <li>In VirtualBox: File → Import Appliance, then select the downloaded .OVA file</li>
+            <li>Before finishing the import, bump RAM to 4096 MB+ and CPUs to 2 if your host can spare it</li>
+            <li>Set the network adapter to <strong>Host-only</strong> or <strong>Internal Network</strong> for now — you'll learn why in the networking module</li>
+            <li>Start the VM and log in with the default credentials on official post-2020 images: <code>kali</code> / <code>kali</code></li>
+            <li>Immediately take a VirtualBox snapshot named "clean install" so you always have a safe rollback point</li>
+          </ul>
+
+          <div class="callout callout-tip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.6.6 1 1.3 1 2.5h6c0-1.2.4-1.9 1-2.5A6 6 0 0 0 12 3z"/></svg>
+            <p><strong>Snapshot before every project</strong>Get in the habit of taking a fresh snapshot before starting each new project in this hub. If a tool misconfigures something, you're one click from a clean slate instead of a reinstall.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 3 -->
+      <article class="module term-window" id="terminal-basics">
+        <div class="module-head"><span class="idx">03</span><h2>Basic Linux terminal commands</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Almost every security tool in Kali is run from the terminal, so comfort with the shell is the single highest-leverage skill in this whole track. These are the commands you'll type dozens of times a day.</p>
+
+          <h4>Moving around the filesystem</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> pwd                    <span class="c-comment"># print current directory</span>
+<span class="c-prompt">$</span> ls -la                 <span class="c-comment"># list all files, including hidden ones</span>
+<span class="c-prompt">$</span> cd Documents/          <span class="c-comment"># move into a folder</span>
+<span class="c-prompt">$</span> cd ..                  <span class="c-comment"># move up one level</span>
+<span class="c-prompt">$</span> mkdir lab-notes        <span class="c-comment"># create a new folder</span></code></pre>
+          </div>
+
+          <h4>Working with files</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> touch scan.txt         <span class="c-comment"># create an empty file</span>
+<span class="c-prompt">$</span> nano scan.txt          <span class="c-comment"># edit a file in the terminal</span>
+<span class="c-prompt">$</span> cat scan.txt           <span class="c-comment"># print a file's contents</span>
+<span class="c-prompt">$</span> cp scan.txt backup.txt <span class="c-comment"># copy a file</span>
+<span class="c-prompt">$</span> mv backup.txt old/     <span class="c-comment"># move (or rename) a file</span>
+<span class="c-prompt">$</span> rm old/backup.txt      <span class="c-comment"># delete a file — no recycle bin, be careful</span></code></pre>
+          </div>
+
+          <h4>Permissions &amp; running as root</h4>
+          <ul>
+            <li><code>sudo &lt;command&gt;</code> — run a single command with administrator privileges</li>
+            <li><code>chmod +x script.sh</code> — make a file executable</li>
+            <li><code>chown kali:kali file.txt</code> — change who owns a file</li>
+            <li>Many Kali tools (packet capture, raw socket scans) need <code>sudo</code> because they touch the network stack directly</li>
+          </ul>
+
+          <h4>Getting help without leaving the terminal</h4>
+          <ul>
+            <li><code>man nmap</code> — the full manual page for a tool</li>
+            <li><code>nmap --help</code> — a quick summary of flags</li>
+            <li><code>whatis nmap</code> — a one-line description</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- MODULE 4 -->
+      <article class="module term-window" id="updating-packages">
+        <div class="module-head"><span class="idx">04</span><h2>Updating packages</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Kali is a rolling-release distribution — tools and security patches land continuously instead of once a year. Because you're relying on these tools to behave correctly (and securely), updating regularly matters more here than on a typical desktop OS.</p>
+
+          <h4>The standard update routine</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> sudo apt update              <span class="c-comment"># refresh the package index</span>
+<span class="c-prompt">$</span> sudo apt full-upgrade -y     <span class="c-comment"># upgrade everything, including dependency changes</span>
+<span class="c-prompt">$</span> sudo apt autoremove -y       <span class="c-comment"># clean up packages nothing depends on anymore</span></code></pre>
+          </div>
+
+          <h4>Useful variations</h4>
+          <ul>
+            <li><code>apt list --upgradable</code> — see what would change before you commit</li>
+            <li><code>apt search burpsuite</code> — check whether a tool is available before installing it</li>
+            <li><code>sudo apt install &lt;package&gt;</code> — install something new</li>
+          </ul>
+
+          <div class="callout callout-caution">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.5h.01M10.3 3.9 2.6 18a2 2 0 0 0 1.8 3h15.2a2 2 0 0 0 1.8-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+            <p><strong>Use full-upgrade, not upgrade</strong><code>apt upgrade</code> refuses to remove packages, which can leave your system half-updated. <code>full-upgrade</code> handles dependency changes correctly. Reboot afterward if a new kernel was installed.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- MODULE 5 -->
+      <article class="module term-window" id="kali-menu">
+        <div class="module-head"><span class="idx">05</span><h2>Navigating the Kali menu</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Kali's Applications menu isn't organized alphabetically — it's organized by the phase of a penetration test where each tool is typically used. Learning this layout means you can find the right tool by thinking "what am I trying to do?" rather than remembering a specific name.</p>
+
+          <h4>The core categories</h4>
+          <ul>
+            <li><strong>Information Gathering</strong> — recon tools like Nmap, theHarvester, and DNS enumeration utilities</li>
+            <li><strong>Vulnerability Analysis</strong> — scanners that flag known weaknesses, such as Nikto</li>
+            <li><strong>Web Application Analysis</strong> — Burp Suite, OWASP ZAP, sqlmap</li>
+            <li><strong>Password Attacks</strong> — Hydra, John the Ripper, Hashcat</li>
+            <li><strong>Wireless Attacks</strong> — Aircrack-ng suite, Kismet</li>
+            <li><strong>Exploitation Tools</strong> — the Metasploit Framework and related utilities</li>
+            <li><strong>Sniffing &amp; Spoofing</strong> — Wireshark, Ettercap</li>
+            <li><strong>Post Exploitation</strong> — tools used after gaining access, like Mimikatz-style credential tools</li>
+            <li><strong>Forensics</strong> — Autopsy, disk and memory analysis tools</li>
+            <li><strong>Reporting Tools</strong> — utilities to help document findings professionally</li>
+          </ul>
+
+          <h4>Handy shortcuts</h4>
+          <ul>
+            <li>The "Top 10 Security Tools" menu surfaces the most commonly used tool in each category</li>
+            <li>Right-click any tool and choose "Add to Favorites" to pin it to the sidebar</li>
+            <li>The terminal icon on the taskbar is your most-used shortcut — learn its keybinding</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- MODULE 6 -->
+      <article class="module term-window" id="networking-basics">
+        <div class="module-head"><span class="idx">06</span><h2>Networking basics</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>Pentesting is fundamentally about sending network traffic to a target and understanding the responses, so a working mental model of IP addressing and VirtualBox's network modes is essential before you run your first scan.</p>
+
+          <h4>Core concepts</h4>
+          <ul>
+            <li><strong>IP address</strong> — a numeric identifier for a device on a network, e.g. <code>192.168.56.10</code></li>
+            <li><strong>Subnet</strong> — a range of IP addresses grouped together, e.g. <code>192.168.56.0/24</code> covers .0 through .255</li>
+            <li><strong>Gateway</strong> — the device (usually a router) that traffic passes through to leave the local network</li>
+            <li><strong>DHCP vs static</strong> — DHCP assigns addresses automatically; a static IP is set manually and never changes</li>
+          </ul>
+
+          <h4>Checking your own network config</h4>
+          <div class="code-block">
+            <div class="cb-head"><span>bash</span><button class="copy-btn" data-label="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+            <pre><code><span class="c-prompt">$</span> ip a                   <span class="c-comment"># show all network interfaces and their IPs</span>
+<span class="c-prompt">$</span> ip route                <span class="c-comment"># show the routing table / default gateway</span>
+<span class="c-prompt">$</span> ping -c 4 10.0.10.20   <span class="c-comment"># send 4 ping packets to a target</span></code></pre>
+          </div>
+
+          <h4>VirtualBox network modes — pick the safe one</h4>
+          <ul>
+            <li><strong>NAT</strong> — the VM can reach the internet, but nothing else can reach the VM directly. Fine for updates, not for lab exercises.</li>
+            <li><strong>Host-only Adapter</strong> — the VM can only talk to your host machine and other VMs on the same host-only network. This is what most projects in this hub use.</li>
+            <li><strong>Internal Network</strong> — VMs can talk to each other but have zero access to the internet or your host — the safest option for running exploits against a target VM.</li>
+            <li><strong>Bridged</strong> — the VM appears as a real device on your physical network. Avoid this for lab work; it's the mode most likely to accidentally scan devices you don't own.</li>
+          </ul>
+
+          <figure style="margin:20px 0 6px;">
+            <img src="../assets/img/lab-network-topology.svg" alt="Diagram of a host computer running VirtualBox with an isolated network containing a Kali attacker VM at 10.0.10.10 and a vulnerable target VM at 10.0.10.20, with no connection to the internet or home network.">
+            <figcaption style="font-size:12.5px; color:var(--text-dim); margin-top:8px; font-family:var(--font-mono);">A typical two-VM lab: Kali as the attacker, a deliberately vulnerable VM as the target, isolated from everything else.</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <!-- MODULE 7 -->
+      <article class="module term-window" id="safe-legal">
+        <div class="module-head"><span class="idx">07</span><h2>Safe and legal pentesting</h2></div>
+        <div class="divider"></div>
+        <div class="module-body">
+          <p>This is the most important module in the entire beginner track. Every tool taught on this hub can be used legally for defense and research, or illegally to cause real harm — the only difference is authorization. Read this module before you open a single tool.</p>
+
+          <h4>The legal baseline</h4>
+          <ul>
+            <li>In the United States, the Computer Fraud and Abuse Act (CFAA) makes it a federal crime to access a computer system "without authorization." Most other countries have equivalent laws.</li>
+            <li>"I didn't cause any damage" is not a defense — unauthorized <em>access</em> alone can be a crime, regardless of intent or outcome.</li>
+            <li>Authorization must be explicit, in writing, and cover the specific systems you're testing — a verbal "sure, go ahead" is not enough for real-world work.</li>
+          </ul>
+
+          <h4>What "authorized" looks like in practice</h4>
+          <ul>
+            <li>Systems and VMs you personally own and control, on a network isolated from anyone else</li>
+            <li>Deliberately vulnerable practice targets built for this purpose: DVWA, Metasploitable, OWASP Juice Shop, VulnHub and HackTheBox machines</li>
+            <li>A real client or employer's systems, only under a signed contract with a defined scope, dates, and rules of engagement</li>
+            <li>Bug bounty programs, only within the exact scope published by the program</li>
+          </ul>
+
+          <h4>Good habits from day one</h4>
+          <ul>
+            <li>Keep attacker and target machines on an isolated Host-only or Internal Network, never Bridged, during practice</li>
+            <li>Document what you did and when — good notes are half of professional pentesting</li>
+            <li>If you ever stumble onto a real vulnerability by accident outside a lab, stop, don't exploit it further, and consider responsible disclosure to the vendor</li>
+          </ul>
+
+          <div class="callout callout-legal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 20h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none"/></svg>
+            <p><strong>Read before proceeding</strong>Nothing on this site is legal advice, and laws vary by country and state. When in doubt, don't run a tool against anything you don't own or don't have written permission to test. See the full <a href="../resources/index.html#legal" style="color:inherit; text-decoration:underline;">legal &amp; safe-practice guidelines</a> for more detail.</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- ============ PAIRED PROJECTS ============ -->
+  <section class="tight">
+    <div class="wrap">
+      <div class="eyebrow">ls ~/projects --level=beginner</div>
+      <h2 class="section-title">Put it into practice</h2>
+      <p class="section-lede" style="margin-bottom:30px;">Three short projects that use exactly what you just learned.</p>
+      <div class="grid-3">
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/nmap-scan</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-beginner">Beginner</span>
+            <h3>Your first Nmap scan</h3>
+            <p>Scan a target VM to discover which ports and services are exposed.</p>
+            <a href="../projects/index.html#nmap-scan" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/wireshark-capture</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-beginner">Beginner</span>
+            <h3>Wireshark packet capture</h3>
+            <p>Capture and read live traffic between two lab VMs to see what a network conversation actually looks like.</p>
+            <a href="../projects/index.html#wireshark-capture" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+        <article class="project-card term-window">
+          <div class="term-titlebar"><div class="term-dots"><span></span><span></span><span></span></div><div class="term-path">~/projects/dvwa-setup</div></div>
+          <div class="project-card-body">
+            <span class="badge badge-beginner">Beginner</span>
+            <h3>Set up DVWA</h3>
+            <p>Stand up the Damn Vulnerable Web Application so you have a legal target for every later web-focused project.</p>
+            <a href="../projects/index.html#dvwa-setup" class="btn btn-outline btn-sm">View project →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="wrap" style="text-align:center;">
+      <p style="color:var(--text-dim); font-family:var(--font-mono); font-size:13px; margin-bottom:16px;">root@kali:~/beginner# cd ../intermediate</p>
+      <a href="../intermediate/index.html" class="btn btn-primary">Continue to Intermediate track →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <a href="../index.html" class="brand" style="margin-bottom:12px; display:inline-flex;">
+          <svg class="brand-mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#121822" stroke="#263140" stroke-width="2"/><path d="M18 21 L30 32 L18 43" fill="none" stroke="#2bd9c9" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="34" y1="43" x2="47" y2="43" stroke="#9c8cf5" stroke-width="4.5" stroke-linecap="round"/></svg>
+          <span class="brand-name">kali<span class="dim">@</span>learning-hub</span>
+        </a>
+        <p>A free, independent Kali Linux curriculum for learning ethical hacking safely and legally. Not affiliated with or endorsed by Offensive Security.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="../beginner/index.html">Beginner track</a></li>
+          <li><a href="../intermediate/index.html">Intermediate track</a></li>
+          <li><a href="../advanced/index.html">Advanced track</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="../projects/index.html">All projects</a></li>
+          <li><a href="../resources/index.html">Cheat sheets</a></li>
+          <li><a href="../resources/index.html#legal">Legal guidelines</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Official docs</h4>
+        <ul>
+          <li><a href="https://www.kali.org/docs/" target="_blank" rel="noopener">Kali Linux docs</a></li>
+          <li><a href="https://nmap.org/book/" target="_blank" rel="noopener">Nmap reference guide</a></li>
+          <li><a href="https://owasp.org/" target="_blank" rel="noopener">OWASP</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>root@kali:~/beginner# exit</p>
+      <p>© 2026 Kali Linux Learning Hub · Educational content only · For authorized lab use</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
